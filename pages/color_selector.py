@@ -1,5 +1,5 @@
 """
-# My opencv app
+# My opencv app color selector
 DESC: app for opencv visualizing
 user inputs: R, G, B
 output: show color user selector by RGB
@@ -24,5 +24,3 @@ def app():
     img[:] = [B//2, G//2, R//2]
     cv2.imwrite('cache/temp.jpg', img)
     st.image('cache/temp.jpg', clamp=True, channels='BGR')
-
-
