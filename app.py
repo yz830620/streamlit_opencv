@@ -10,7 +10,7 @@ app = MultiPage()
 st.title("OpenCV practice")
 
 # Add all your applications (pages) here
-app.add_page("opencv", color_selector.app)
+app.add_page("color_selector", color_selector.app)
 
 # The main app
 app.run()
