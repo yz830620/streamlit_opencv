@@ -1,27 +1,21 @@
 """
 # Opencv app for perspective transform
 DESC: app for opencv visualizing
-user inputs: 3 or 4 points to transform
+user inputs: 3 points to as src point , 3 points as dst point 
+(point include x,y, totally 12 data as user input)
 output: show image after user transform
 """
 import streamlit as st
 import cv2
 import numpy as np
-from PIL import Image
+from .utils import replace_file_by_upload
 
 def app():
     st.subheader('Opencv perspective transform visualizer')
     st.caption('create by Even Pan, Date: 2022/2/3')
 
     img = cv2.imread('img_source/poker.jpeg')
-    uploaded_file = st.sidebar.file_uploader("Choose an image...", type=["jpg", "jpeg", 'png'])
-
-    if uploaded_file:
-        st.write('upload successed')
-        image = np.array(Image.open(uploaded_file))
-        st.image(image, width=200)
-        img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-    
+    img = replace_file_by_upload(img)
 
     rows, cols, c = img.shape
 
@@ -62,7 +56,4 @@ def app():
 
     M1 = cv2.getAffineTransform(np.float32(points_src), np.float32(points_dsc))
     dst_transform = cv2.warpAffine(img, M1, (cols,rows))
-
-
-
     st.image(dst_transform, channels='BGR')

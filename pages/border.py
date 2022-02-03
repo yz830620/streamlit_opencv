@@ -6,8 +6,7 @@ output: show image with different kind border
 """
 import streamlit as st
 import cv2
-import numpy as np
-from PIL import Image
+from .utils import replace_file_by_upload
 
 
 def app():
@@ -23,14 +22,7 @@ def app():
         }
 
     img = cv2.imread('img_source/face-png-42647.png')
-    uploaded_file = st.sidebar.file_uploader("Choose an image...", type=["jpg", "jpeg", 'png'])
-    
-    if uploaded_file:
-        st.write('upload successed')
-        image = np.array(Image.open(uploaded_file))
-        st.image(image, width=200)
-        img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-        # st.image(image_boxed)
+    img = replace_file_by_upload(img)
 
 
     res = st.columns(3)
