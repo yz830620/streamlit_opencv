@@ -1,19 +1,17 @@
 """
 # My opencv app border fill
 DESC: app for opencv visualizing
-user inputs: R, G, B
-output: show color user selector by RGB
+user inputs: upload image
+output: show image with different kind border
 """
-import io
 import streamlit as st
 import cv2
 import numpy as np
-from tempfile import NamedTemporaryFile
 from PIL import Image
 
 
 def app():
-    st.subheader('Opencv color seletor')
+    st.subheader('Opencv border visualizer')
     st.caption('create by Even Pan, Date: 2022/2/2')
     
     method_dict = {
@@ -23,7 +21,6 @@ def app():
         'replicate': cv2.BORDER_REPLICATE,
         'wrap': cv2.BORDER_WRAP
         }
-    
 
     img = cv2.imread('img_source/face-png-42647.png')
     uploaded_file = st.sidebar.file_uploader("Choose an image...", type=["jpg", "jpeg", 'png'])

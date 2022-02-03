@@ -5,7 +5,6 @@ user inputs: R, G, B
 output: show color user selector by RGB
 """
 import streamlit as st
-import cv2
 import numpy as np
 
 
