@@ -26,45 +26,59 @@ def app():
     kernel_size = st.slider('kernel size', 3, 21, 5, 2)
 
     kernel = np.ones((kernel_size,kernel_size), np.uint8)
-    erosion = cv2.erode(img, kernel, iterations=1)
     with rep[1]:
+        erosion = cv2.erode(img, kernel, iterations=1)
         st.write('erosion')
         st.image(erosion)
 
-    dilation = cv2.dilate(img, kernel, iterations=1)
-
     with rep[2]:
+        dilation = cv2.dilate(img, kernel, iterations=1)
         st.write('dilation')
         st.image(dilation)
 
-    opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
-
     rep = st.columns(3)
     with rep[0]:
+        opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
         st.write('opening')
         st.image(opening)
 
-    closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
-
     with rep[1]:
+        closing = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel)
         st.write('closing')
         st.image(closing)
 
-    gradient = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)
-
     with rep[2]:
+        gradient = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)
         st.write('gradient')
         st.image(gradient)
 
-    tophat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)
-
-    rep = st.columns(2)
+    rep = st.columns(3)
     with rep[0]:
+        st.write('origin')
+        st.image(img)
+
+    with rep[1]:
+        tophat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)
         st.write('tophat')
         st.image(tophat)
 
-    blackhat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)
-
-    with rep[1]:
+    with rep[2]:
+        blackhat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)
         st.write('blackhat')
         st.image(blackhat)
+
+    rep = st.columns(3)
+    with rep[0]:
+        laplacian = cv2.Laplacian(img, cv2.CV_64F)
+        st.write('Laplacian')
+        st.image(laplacian, clamp=True)
+
+    with rep[1]:
+        sobel_x = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=kernel_size)
+        st.write('Sobel X')
+        st.image(sobel_x, clamp=True)
+
+    with rep[2]:
+        sobel_y = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=kernel_size)
+        st.write('Sobel Y')
+        st.image(sobel_y, clamp=True)
