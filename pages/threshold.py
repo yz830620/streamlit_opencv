@@ -41,3 +41,18 @@ def app():
             ret, thresh = cv2.threshold(img, int(threshold), 255, method_dict[key])
             st.write(key)
             st.image(thresh)
+
+    st.subheader('adaptive Threshold')
+
+    block_size = st.slider('block size', 5, 45, 33, step=2)
+    c = st.slider('C', 1, 30, 17)
+    
+    rep = st.columns(2)
+    with rep[0]:
+        adapt_mean = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, blockSize=block_size, C=c)
+        st.write('ADAPTIVE_THRESH_MEAN_C')
+        st.image(adapt_mean)
+    with rep[1]:
+        adapt_gaussian = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, blockSize=block_size, C=c)
+        st.write('ADAPTIVE_THRESH_GAUSSIAN_C')
+        st.image(adapt_gaussian)
