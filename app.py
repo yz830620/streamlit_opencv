@@ -2,7 +2,12 @@ import streamlit as st
 
 # Custom imports 
 from multipage import MultiPage
-from pages import color_selector, border, perspective_transform, threshold
+from pages import (color_selector,
+                   border,
+                   perspective_transform,
+                   threshold,
+                   morphology,
+                )
 
 # Create an instance of the app 
 app = MultiPage()
@@ -10,6 +15,7 @@ app = MultiPage()
 st.title("OpenCV Visualization")
 
 # Add all your applications (pages) here
+app.add_page("morphology", morphology.app)
 app.add_page("threshold", threshold.app)
 app.add_page("perspective transform", perspective_transform.app)
 app.add_page("color selector", color_selector.app)
