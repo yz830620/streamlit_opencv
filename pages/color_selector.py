@@ -10,10 +10,11 @@ import numpy as np
 
 
 def app():
-    st.subheader('Opencv color seletor')
+    st.header('Opencv color seletor')
     st.caption('create by Even Pan, Date: 2022/2/2')
 
 
+    st.subheader('choose color in rgb system')
     img = np.zeros((300, 512, 3), np.int16)
 
     R = st.slider('Red', min_value=0, max_value=255, value=0)
