@@ -25,10 +25,19 @@ def app():
         }
     
 
-    img = cv2.imread('img_source/opencv_logo.png')
+    img = cv2.imread('img_source/face-png-42647.png')
+    uploaded_file = st.sidebar.file_uploader("Choose an image...", type=["jpg", "jpeg", 'png'])
+    
+    if uploaded_file:
+        st.write('upload successed')
+        image = np.array(Image.open(uploaded_file))
+        st.image(image, width=200)
+        img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        # st.image(image_boxed)
+
 
     res = st.columns(3)
-    BORDER_PX = st.slider('how many pixel to show in border', min_value=10, max_value=200, value=20)
+    BORDER_PX = st.slider('how many pixel to show in border', min_value=10, max_value=200, value=70)
 
     with res[0]:
         st.write('origin')
@@ -43,8 +52,10 @@ def app():
             st.write(key)
             st.image(transformed_img, channels='BGR')
 
+    rep = st.columns(3)
+
     for idx, key in enumerate(list(method_dict.keys())[2:]):
-        with res[idx]:
+        with rep[idx]:
             transformed_img = cv2.copyMakeBorder(img, BORDER_PX,BORDER_PX,BORDER_PX,BORDER_PX, method_dict[key])
             st.write(key)
             st.image(transformed_img, channels='BGR')
