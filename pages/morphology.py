@@ -1,8 +1,7 @@
 """
-# Opencv app for perspective transform
+# Opencv app for morphology
 DESC: app for opencv visualizing
-user inputs: 3 points to as src point , 3 points as dst point 
-(point include x,y, totally 12 data as user input)
+user inputs: kernel size
 output: show image after user transform
 """
 import streamlit as st
@@ -11,7 +10,7 @@ import numpy as np
 from .utils import replace_file_by_upload
 
 def app():
-    st.subheader('Opencv perspective transform visualizer')
+    st.subheader('Opencv morphology visualizer')
     st.caption('create by Even Pan, Date: 2022/2/3')
 
     img = cv2.imread('img_source/face-png-42647.png')
@@ -52,7 +51,6 @@ def app():
         st.write('gradient')
         st.image(gradient)
 
-    rep = st.columns(3)
     with rep[0]:
         st.write('origin')
         st.image(img)
@@ -66,19 +64,3 @@ def app():
         blackhat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)
         st.write('blackhat')
         st.image(blackhat)
-
-    rep = st.columns(3)
-    with rep[0]:
-        laplacian = cv2.Laplacian(img, cv2.CV_64F)
-        st.write('Laplacian')
-        st.image(laplacian, clamp=True)
-
-    with rep[1]:
-        sobel_x = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=kernel_size)
-        st.write('Sobel X')
-        st.image(sobel_x, clamp=True)
-
-    with rep[2]:
-        sobel_y = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=kernel_size)
-        st.write('Sobel Y')
-        st.image(sobel_y, clamp=True)

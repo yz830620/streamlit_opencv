@@ -7,6 +7,7 @@ from pages import (color_selector,
                    perspective_transform,
                    threshold,
                    morphology,
+                   laplacian_canny,
                 )
 
 # Create an instance of the app 
@@ -15,6 +16,7 @@ app = MultiPage()
 st.title("OpenCV Visualization")
 
 # Add all your applications (pages) here
+app.add_page("laplacian and canny", laplacian_canny.app)
 app.add_page("morphology", morphology.app)
 app.add_page("threshold", threshold.app)
 app.add_page("perspective transform", perspective_transform.app)
